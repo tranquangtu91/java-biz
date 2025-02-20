@@ -1,0 +1,19 @@
+package @@package@@.service.@@snakeCaseName@@;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import @@package@@.entity.@@snakeCaseName@@.@@pascalCaseName@@;
+import @@package@@.repository.@@snakeCaseName@@.@@pascalCaseName@@Repository;
+import com.ttq.app.common.service.BaseEntityService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class @@pascalCaseName@@Service extends BaseEntityService<@@pascalCaseName@@> {
+
+    @@pascalCaseName@@Service(@Autowired @@pascalCaseName@@Repository entityRepository) {
+        this.entityRepository = entityRepository;
+    }
+}

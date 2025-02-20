@@ -57,109 +57,91 @@ public class InAppCacheHandler implements ICacheHandler {
 
     @Override
     public Object memoizeHash(String key, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeHash'");
     }
 
     @Override
     public Object memoizeHash(String key, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeHash'");
     }
 
     @Override
     public Object memoizeHashField(String key, String field, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeHashField'");
     }
 
     @Override
     public Object memoizeHashField(String key, String field, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeHashField'");
     }
 
     @Override
     public Object memoizeScore(String key, String member, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeScore'");
     }
 
     @Override
     public Object memoizeScore(String key, String member, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeScore'");
     }
 
     @Override
     public List<Object> memoizeDomainList(Class<?> domainClass, String key, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeDomainList'");
     }
 
     @Override
     public List<Object> memoizeDomainList(Class<?> domainClass, String key, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeDomainList'");
     }
 
     @Override
     public List<Long> memoizeDomainIdList(Class<?> domainClass, String key, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeDomainIdList'");
     }
 
     @Override
     public List<Long> memoizeDomainIdList(Class<?> domainClass, String key, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeDomainIdList'");
     }
 
     @Override
     public List<Long> getIdListFor(String key) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getIdListFor'");
     }
 
     @Override
     public void saveIdListTo(String key, List<Object> domainList, Long expire) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveIdListTo'");
     }
 
     @Override
     public List<Object> hydrateDomainObjectsFrom(Class<?> domainClass, List<Long> idList) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'hydrateDomainObjectsFrom'");
     }
 
     @Override
     public Object memoizeDomainObject(Class<?> domainClass, String key, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeDomainObject'");
     }
 
     @Override
     public Object memoizeDomainObject(Class<?> domainClass, String key, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeDomainObject'");
     }
 
     @Override
     public Long persistDomainId(Long domainId, String key, Long expire) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'persistDomainId'");
     }
 
     @Override
     public Object memoizeObject(Class<?> clazz, String key, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeObject'");
     }
 
     @Override
     public Object memoizeObject(Class<?> clazz, String key, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeObject'");
     }
 
@@ -181,31 +163,26 @@ public class InAppCacheHandler implements ICacheHandler {
 
     @Override
     public Object memoizeList(String key, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeList'");
     }
 
     @Override
     public Object memoizeList(String key, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeList'");
     }
 
     @Override
     public Object memoizeSet(String key, Long expire, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeSet'");
     }
 
     @Override
     public Object memoizeSet(String key, MemoizeOption option, Closure closure) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'memoizeSet'");
     }
 
     @Override
     public List<String> keys() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'keys'");
     }
 

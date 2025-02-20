@@ -106,7 +106,7 @@ public class ObjectUtils extends org.springframework.util.ObjectUtils {
         return __items.toArray();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "deprecation" })
     public static <T> T deepClone(T item) {
         byte[] data = SerializationUtils.serialize(item);
         T obj = (T) SerializationUtils.deserialize(data);
