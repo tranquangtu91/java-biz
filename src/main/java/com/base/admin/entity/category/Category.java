@@ -1,12 +1,7 @@
 package com.base.admin.entity.category;
 
 import java.util.List;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Index;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import com.base.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;

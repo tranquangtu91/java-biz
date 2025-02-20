@@ -72,7 +72,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception ex) {
-            log.error(String.format("%s...", ex.getClass().getName()));
+            log.error(String.format("%s: %s", ex.getClass().getName(), ex.getMessage()));
             if (verbose) {
                 ex.printStackTrace();
             }

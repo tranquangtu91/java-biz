@@ -13,6 +13,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Selection;
 
+import org.antlr.v4.runtime.misc.InterpreterDataReader.InterpreterData;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -117,18 +118,59 @@ public abstract class BaseEntityService<T> implements IEntityService<T> {
             sortOrder = dataTableFilter.getSortOrder() == SortOrder.ASC.getVal() ? "asc" : "desc";
         }
 
-        Map<String, Filter> filters = dataTableFilter.getFilters() == null ? new HashMap<>()
-                : dataTableFilter.getFilters();
-
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<?> cq;
-
         if (fields.size() > 0)
             cq = cb.createQuery(Object.class);
         else
             cq = cb.createQuery(domainClass);
         Root<?> objectRoot = cq.from(domainClass);
+        if (fields.size() > 0) {
+            List<Selection<?>> selections = fields.stream().map(objectRoot::get).collect(Collectors.toList());
+            cq.multiselect(selections);
+        }
+        cq.where(getPredicates(dataTableFilter, options, cb, objectRoot));
+        if (sortOrder.equals("desc")) {
+            cq.orderBy(cb.desc(objectRoot.get(sortField)));
+        } else {
+            cq.orderBy(cb.asc(objectRoot.get(sortField)));
+        }
+
+        TypedQuery<?> query = entityManager.createQuery(cq);
+        query.setFirstResult(first);
+        query.setMaxResults(rows);
+        List<?> items = query.getResultList();
+
+        CriteriaQuery<Long> __cq = cb.createQuery(Long.class);
+        Root<?> __objectRoot = __cq.from(domainClass);
+        __cq.select(cb.count(__objectRoot));
+        __cq.where(getPredicates(dataTableFilter, options, cb, __objectRoot));
+        Long totalRows = entityManager.createQuery(__cq).getSingleResult();
+
+        DataTableResponse<Object> dtr = new DataTableResponse<>();
+        dtr.rows = rows;
+        dtr.first = first;
+        dtr.totalRows = totalRows;
+        dtr.items = (List<Object>) items;
+        return dtr;
+    }
+
+    /**
+     * Get predicates for the query
+     * @param dataTableFilter
+     * @param options
+     * @param cb
+     * @param objectRoot
+     * @return
+     */
+    private Predicate[] getPredicates(DataTableFilter dataTableFilter, LoadDataTableOptions options, CriteriaBuilder cb,
+            Root<?> objectRoot) {
         List<Predicate> predicates = new ArrayList<>();
+
+        Class<?> domainClass = options.domainClass == null ? Object.class : options.domainClass;
+        Map<String, Filter> filters = dataTableFilter.getFilters() == null ? new HashMap<>()
+                : dataTableFilter.getFilters();
+        List<String> declaredFieldNames = ReflectUtils.getDeclaredFieldNames(domainClass);
 
         for (Entry<String, Filter> entry : filters.entrySet()) {
             String key = entry.getKey();
@@ -279,7 +321,7 @@ public abstract class BaseEntityService<T> implements IEntityService<T> {
         }
 
         if (declaredFieldNames.contains("deleted")) {
-            predicates.add(0, cb.or(cb.equal(objectRoot.get("deleted"), 0), cb.isNull(objectRoot.get("deleted"))));
+            predicates.add(0, cb.or(cb.equal(objectRoot.get("deleted"), false), cb.isNull(objectRoot.get("deleted"))));
         }
 
         GlobalSearchParam gsp = dataTableFilter.getGlobalSearchParam();
@@ -296,32 +338,7 @@ public abstract class BaseEntityService<T> implements IEntityService<T> {
             predicates.add(cb.or(predicateOR.toArray(new Predicate[0])));
         }
 
-        if (fields.size() > 0) {
-            List<Selection<?>> selections = fields.stream().map(objectRoot::get).collect(Collectors.toList());
-            cq.multiselect(selections);
-        }
-        cq.where(predicates.toArray(new Predicate[0]));
-        if (sortOrder.equals("desc")) {
-            cq.orderBy(cb.desc(objectRoot.get(sortField)));
-        } else {
-            cq.orderBy(cb.asc(objectRoot.get(sortField)));
-        }
-
-        TypedQuery<?> query = entityManager.createQuery(cq);
-        query.setFirstResult(first);
-        query.setMaxResults(rows);
-        List<?> items = query.getResultList();
-
-        ((CriteriaQuery<Long>) cq).select(cb.count(objectRoot));
-        query = entityManager.createQuery(cq);
-        Long totalRows = (Long) query.getSingleResult();
-
-        DataTableResponse<Object> dtr = new DataTableResponse<>();
-        dtr.rows = rows;
-        dtr.first = first;
-        dtr.totalRows = totalRows;
-        dtr.items = (List<Object>) items;
-        return dtr;
+        return predicates.toArray(new Predicate[0]);
     }
 
     static Date tryParseDate(String dateStr) {
