@@ -25,9 +25,9 @@ spring:
 ---
 log:
   app_name: base-app
-  pattern: "[%p] %d{yy-MM-dd HH:mm:ss.SSS, GMT+7:00} %C{5}.%M.%L: %m%n"
+  pattern: "%d{yy-MM-dd HH:mm:ss.SSS, +07:00} [%5p] %C{5}.%M.%L: %m%n"
   logstash:
-    destination: 10.100.20.99:5000
+    destination: localhost:5000
   file:
     path: "/opt/logs"
 ---
