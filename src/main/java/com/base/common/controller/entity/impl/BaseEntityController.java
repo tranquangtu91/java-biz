@@ -9,10 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.base.common.controller.entity.IEntityController;
 import com.base.common.dto.datatablefilter.DataTableFilter;
+import com.base.common.dto.datatablefilter.LoadDataTableOptions;
 import com.base.common.dto.datatableresponse.DataTableResponse;
 import com.base.common.dto.generalresponse.ResponseCode;
 import com.base.common.service.IEntityService;
-import com.base.common.service.LoadDataTableOptions;
 import com.base.common.utils.convert.object.ObjectUtils;
 
 @SuppressWarnings("unchecked")
@@ -114,12 +114,20 @@ public class BaseEntityController<T> implements IEntityController {
     public ResponseEntity<?> loadDataTablePost(Map<String, Object> params) {
         DataTableFilter dtf = (DataTableFilter) DataTableFilter.mapToObject(params);
         LoadDataTableOptions options = new LoadDataTableOptions();
-        options.domainClass = domainClass;
+        options.domainClass = getDomainClass();
         DataTableResponse dtr = entityService.loadDataTable(dtf, options);
         if (dtr.code == ResponseCode.SUCCESS) {
             dtr.items = dtr.items;
         }
         String[] __getExcludeFields = getExcludeFields.toArray(new String[0]);
         return new ResponseEntity<>(ObjectUtils.modifyData(dtr, __getExcludeFields), HttpStatus.OK);
+    }
+
+    /**
+     * Get class of T
+     * @return
+     */
+    private Class<T> getDomainClass() {
+        return (Class<T>) ((java.lang.reflect.ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 }

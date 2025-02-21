@@ -3,7 +3,7 @@ package com.base.common.utils.cache;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.base.common.utils.cache.in_app.InAppCacheHandler;
+import com.base.common.utils.cache.impl.inapp.InAppCacheHandler;
 
 public class CacheHandlerFactory {
 

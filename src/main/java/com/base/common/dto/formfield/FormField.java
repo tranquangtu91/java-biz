@@ -67,6 +67,10 @@ public class FormField {
     public Boolean serverSearch;
     // Dùng cho type là select =============================================
 
+    // Dùng cho type là textarea ===========================================
+    public Integer rows;
+    // Dùng cho type là textarea ===========================================
+
     // Thuộc tính validator ================================================
     public Boolean required = false;
     public String pattern;
@@ -76,29 +80,58 @@ public class FormField {
     public String errorTip;
     // Thuộc tính validator ================================================
 
+    // Thuộc tính preview ==================================================
+    public Boolean tryPreview = false;
+    public ResourceType resourceType;
+    public String previewStyle;
+    // Thuộc tính preview ==================================================
+
+    public Boolean disabled = false;
+    public Boolean inVisible = false;
+
     public enum FormFieldType {
         Divider, Blank, Text, Textarea, Editor, Password, Email, DatePicker, DateRangePicker, Number, Select, Switch,
         TimePicker, Upload, CheckboxGroup;
     }
 
     public enum UploadListType {
-        Text, Picture, PictureCard
+        Text("text"), Picture("picture"), PictureCard("picture-card");
+
+        public final String value;
+
+        private UploadListType(String value) {
+            this.value = value;
+        }
     }
 
     public enum UploadType {
-        Drag
+        Drag("drag"), Click("click");
+
+        public final String value;
+
+        private UploadType(String value) {
+            this.value = value;
+        }
     }
 
     public enum DatePickerMode {
-        Date, Week, Month, Year
+        Date("date"), Week("week"), Month("month"), Year("year");
+
+        public final String value;
+
+        private DatePickerMode(String value) {
+            this.value = value;
+        }
     }
 
-    public class IOption {
-        public String label;
-        public Object value;
-        public Boolean disabled;
-        public Boolean hide;
-        public String groupLabel;
+    public enum ResourceType {
+        Img("img"), Video("video"), Web("web"), Json("json");
+
+        public final String value;
+
+        private ResourceType(String value) {
+            this.value = value;
+        }
     }
 
     public enum SelectMode {
@@ -111,7 +144,21 @@ public class FormField {
         }
     }
 
+    public class IOption {
+        public String label;
+        public Object value;
+        public Boolean disabled;
+        public Boolean hide;
+        public String groupLabel;
+    }
+
     public enum SelectSource {
-        Api, Static
+        Api("api"), Static("static");
+
+        public final String value;
+
+        private SelectSource(String value) {
+            this.value = value;
+        }
     }
 }

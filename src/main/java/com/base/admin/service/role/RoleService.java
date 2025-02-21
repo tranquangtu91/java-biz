@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.base.admin.entity.role.Role;
 import com.base.admin.repository.role.RoleRepository;
 import com.base.admin.utils.SpringSecurityService;
-import com.base.common.service.BaseEntityService;
+import com.base.common.service.impl.BaseEntityService;
 
 import lombok.extern.slf4j.Slf4j;
 

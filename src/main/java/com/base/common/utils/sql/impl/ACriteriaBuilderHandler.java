@@ -1,8 +1,10 @@
-package com.base.common.utils.sql;
+package com.base.common.utils.sql.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.base.common.utils.sql.ICriteriaBuilderHandler;
 
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Path;

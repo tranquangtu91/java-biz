@@ -15,10 +15,10 @@ public interface ICryptoHandler {
          * Phương thức chuyển đổi giá trị sang Object mong muốn
          */
         IPlanToObject planToObject;
+    }
 
-        public interface IPlanToObject {
-            public Object callback(Object value);
-        }
+    public interface IPlanToObject {
+        public Object callback(Object value);
     }
 
     public enum CryptoAlgorithm {

@@ -1,6 +1,8 @@
-package com.base.common.utils.crypto;
+package com.base.common.utils.crypto.impl;
 
-public class CryptoHandler implements ICryptoHandler {
+import com.base.common.utils.crypto.ICryptoHandler;
+
+public class CryptoHandlerImpl implements ICryptoHandler {
     Boolean usingBase64Encode = false;
 
     @Override

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.base.common.dto.datatablefilter.DataTableFilter;
+import com.base.common.dto.datatablefilter.LoadDataTableOptions;
 import com.base.common.dto.datatableresponse.DataTableResponse;
 
 public interface IEntityService<T> {

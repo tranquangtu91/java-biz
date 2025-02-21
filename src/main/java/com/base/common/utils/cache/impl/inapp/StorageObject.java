@@ -1,4 +1,4 @@
-package com.base.common.utils.cache.in_app;
+package com.base.common.utils.cache.impl.inapp;
 
 public class StorageObject {
     public Long expireTime;

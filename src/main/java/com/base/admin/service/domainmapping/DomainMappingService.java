@@ -13,9 +13,9 @@ import com.base.admin.entity.domainmapping.DomainMapping;
 import com.base.admin.repository.domainmapping.DomainMappingRepository;
 import com.base.common.dto.datatablefilter.DataTableFilter;
 import com.base.common.dto.datatablefilter.Filter;
+import com.base.common.dto.datatablefilter.LoadDataTableOptions;
 import com.base.common.dto.datatableresponse.DataTableResponse;
-import com.base.common.service.BaseEntityService;
-import com.base.common.service.LoadDataTableOptions;
+import com.base.common.service.impl.BaseEntityService;
 
 import lombok.extern.slf4j.Slf4j;
 

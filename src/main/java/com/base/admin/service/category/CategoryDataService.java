@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.base.admin.entity.category.CategoryData;
 import com.base.admin.repository.category.CategoryDataRepository;
-import com.base.common.service.BaseEntityService;
+import com.base.common.service.impl.BaseEntityService;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -18,7 +18,7 @@ import com.base.admin.repository.personal.PersonalRepository;
 import com.base.admin.repository.user.UserRepository;
 import com.base.admin.utils.authprovider.JwtProvider;
 import com.base.common.dto.user.UserDetailsImpl;
-import com.base.common.service.BaseEntityService;
+import com.base.common.service.impl.BaseEntityService;
 import com.base.common.utils.authprovider.IAuthProvider;
 import com.base.common.utils.convert.object.ObjectUtils;
 

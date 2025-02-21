@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.base.admin.entity.requestmap.RequestMap;
 import com.base.admin.repository.requestmap.RequestMapRepository;
 import com.base.admin.utils.SpringSecurityService;
-import com.base.common.service.BaseEntityService;
+import com.base.common.service.impl.BaseEntityService;
 
 @Service
 public class RequestMapService extends BaseEntityService<RequestMap> {

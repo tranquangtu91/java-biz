@@ -40,16 +40,16 @@ public class GeneralResponse {
         return __gr;
     }
 
-    public static GeneralResponse success(Object value) {
-        GeneralResponse __gr = new GeneralResponse();
-        __gr.code = ResponseCode.SUCCESS;
-        __gr.message = "Success";
-        __gr.value = value;
-        return __gr;
-    }
-
     public static GeneralResponse getInstance(GeneralResponseTemp errorCodeDetail) {
         return getInstance(errorCodeDetail, null);
+    }
+
+    public static <T> GeneralResponse success(T value, String message) {
+        GeneralResponse __gr = new GeneralResponse();
+        __gr.code = ResponseCode.SUCCESS;
+        __gr.message = message;
+        __gr.value = value;
+        return __gr;
     }
 
     public Integer getCode() {

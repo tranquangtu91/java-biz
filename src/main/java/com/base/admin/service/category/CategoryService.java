@@ -11,7 +11,7 @@ import com.base.admin.entity.category.Category;
 import com.base.admin.entity.category.CategoryData;
 import com.base.admin.repository.category.CategoryDataRepository;
 import com.base.admin.repository.category.CategoryRepository;
-import com.base.common.service.BaseEntityService;
+import com.base.common.service.impl.BaseEntityService;
 import com.base.common.utils.convert.object.ObjectUtils;
 
 import lombok.extern.slf4j.Slf4j;

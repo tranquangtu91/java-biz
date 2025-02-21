@@ -1,4 +1,4 @@
-package com.base.common.service;
+package com.base.common.dto.datatablefilter;
 
 import java.util.List;
 
