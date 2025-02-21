@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <!--    <include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+    <!--    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>-->
+
+    <springProperty name="log.logstash.destination" source="log.logstash.destination" />
+    <springProperty name="log.pattern" source="log.pattern" />
+    <springProperty name="log.file.path" source="log.file.path" />
+    <springProperty name="log.app_name" source="log.app_name" />
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.file.path}/${log.app_name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.file.path}/${log.app_name}.%d{yyyyMMdd}.zip</fileNamePattern>
+            <maxHistory>365</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <destination>${log.logstash.destination}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"log.app_name":"${log.app_name}"}</customFields>
+        </encoder>
+    </appender> -->
+
+    <root level="DEBUG">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="rollingFile" />
+        <!-- <appender-ref ref="logstash"/> -->
+    </root>
+</configuration>
