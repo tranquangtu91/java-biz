@@ -18,11 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 
-import com.base.common.dto.data_table_filter.DataTableFilter;
-import com.base.common.dto.data_table_filter.Filter;
-import com.base.common.dto.data_table_filter.DataTableFilter.GlobalSearchParam;
-import com.base.common.dto.data_table_filter.DataTableFilter.SortOrder;
-import com.base.common.dto.data_table_response.DataTableResponse;
+import com.base.common.dto.datatablefilter.DataTableFilter;
+import com.base.common.dto.datatablefilter.Filter;
+import com.base.common.dto.datatablefilter.DataTableFilter.GlobalSearchParam;
+import com.base.common.dto.datatablefilter.DataTableFilter.SortOrder;
+import com.base.common.dto.datatableresponse.DataTableResponse;
 import com.base.common.repository.BaseCrudRepository;
 import com.base.common.utils.convert.date.DateUtils;
 import com.base.common.utils.convert.object.ReflectUtils;

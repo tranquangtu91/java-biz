@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.common.dto.form_field.FormField;
-import com.base.common.dto.general_response.GeneralResponse;
-import com.base.common.dto.general_response.ResponseCode;
+import com.base.common.dto.formfield.FormField;
+import com.base.common.dto.generalresponse.GeneralResponse;
+import com.base.common.dto.generalresponse.ResponseCode;
 import com.base.common.utils.convert.object.ObjectUtils;
 import com.base.common.utils.file.Base64FileUtils;
 import com.base.common.utils.validator.ValidatorUtils;

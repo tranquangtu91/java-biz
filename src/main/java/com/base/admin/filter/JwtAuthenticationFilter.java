@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.base.admin.utils.auth_provider.JwtProvider;
+import com.base.admin.utils.authprovider.JwtProvider;
 import com.base.common.configuration.SecurityFilterChainConfiguration;
 import com.base.common.dto.user.UserDetailsImpl;
 import com.base.common.utils.Closure;

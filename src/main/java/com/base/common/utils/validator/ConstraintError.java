@@ -1,7 +1,7 @@
 package com.base.common.utils.validator;
 
-import com.base.common.dto.general_response.GeneralResponseTemp;
-import com.base.common.dto.general_response.ResponseCode;
+import com.base.common.dto.generalresponse.GeneralResponseTemp;
+import com.base.common.dto.generalresponse.ResponseCode;
 
 public class ConstraintError {
     public static final GeneralResponseTemp NULL_OBJECT = new GeneralResponseTemp("ERR001",

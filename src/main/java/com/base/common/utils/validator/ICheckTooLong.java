@@ -2,7 +2,7 @@ package com.base.common.utils.validator;
 
 import java.util.Map;
 
-import com.base.common.dto.form_field.FormField;
+import com.base.common.dto.formfield.FormField;
 
 public interface ICheckTooLong {
     /**

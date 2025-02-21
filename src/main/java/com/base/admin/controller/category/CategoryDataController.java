@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.admin.entity.category.CategoryData;
 import com.base.admin.service.category.CategoryDataService;
-import com.base.common.controller.entity.BaseEntityController;
+import com.base.common.controller.entity.impl.BaseEntityController;
 
 @RestController()
 @RequestMapping(path = "/api/v1/category-data")

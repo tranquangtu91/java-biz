@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.admin.entity.menu.Menu;
 import com.base.admin.service.menu.MenuService;
-import com.base.common.controller.entity.BaseEntityController;
+import com.base.common.controller.entity.impl.BaseEntityController;
 
 @RestController()
 @RequestMapping(path = "/api/v1/menu")

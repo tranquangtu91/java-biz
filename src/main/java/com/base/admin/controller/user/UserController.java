@@ -21,10 +21,10 @@ import com.base.admin.dto.exception.user.WrongPasswordException;
 import com.base.admin.entity.user.User;
 import com.base.admin.service.user.UserService;
 import com.base.admin.utils.SpringSecurityService;
-import com.base.common.controller.entity.BaseEntityController;
-import com.base.common.dto.form_field.FormField;
-import com.base.common.dto.general_response.GeneralResponse;
-import com.base.common.dto.general_response.ResponseCode;
+import com.base.common.controller.entity.impl.BaseEntityController;
+import com.base.common.dto.formfield.FormField;
+import com.base.common.dto.generalresponse.GeneralResponse;
+import com.base.common.dto.generalresponse.ResponseCode;
 import com.base.common.utils.convert.object.ObjectUtils;
 import com.base.common.utils.validator.ValidatorUtils;
 

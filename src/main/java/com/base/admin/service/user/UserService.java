@@ -16,10 +16,10 @@ import com.base.admin.entity.personal.Personal;
 import com.base.admin.entity.user.User;
 import com.base.admin.repository.personal.PersonalRepository;
 import com.base.admin.repository.user.UserRepository;
-import com.base.admin.utils.auth_provider.JwtProvider;
+import com.base.admin.utils.authprovider.JwtProvider;
 import com.base.common.dto.user.UserDetailsImpl;
 import com.base.common.service.BaseEntityService;
-import com.base.common.utils.auth_provider.IAuthProvider;
+import com.base.common.utils.authprovider.IAuthProvider;
 import com.base.common.utils.convert.object.ObjectUtils;
 
 import lombok.extern.slf4j.Slf4j;

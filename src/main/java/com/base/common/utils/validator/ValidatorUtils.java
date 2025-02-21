@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.base.common.dto.form_field.FormField;
-import com.base.common.dto.general_response.GeneralResponse;
-import com.base.common.dto.general_response.GeneralResponseErrorDetail;
-import com.base.common.dto.general_response.GeneralResponseTemp;
+import com.base.common.dto.formfield.FormField;
+import com.base.common.dto.generalresponse.GeneralResponse;
+import com.base.common.dto.generalresponse.GeneralResponseErrorDetail;
+import com.base.common.dto.generalresponse.GeneralResponseTemp;
 import com.base.common.utils.convert.object.ObjectUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

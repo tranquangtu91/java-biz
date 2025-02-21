@@ -17,8 +17,8 @@ import com.base.admin.dto.category.GetCategoryDataDto;
 import com.base.admin.entity.category.Category;
 import com.base.admin.entity.category.CategoryData;
 import com.base.admin.service.category.CategoryService;
-import com.base.common.controller.entity.BaseEntityController;
-import com.base.common.dto.general_response.GeneralResponse;
+import com.base.common.controller.entity.impl.BaseEntityController;
+import com.base.common.dto.generalresponse.GeneralResponse;
 import com.base.common.utils.convert.object.ObjectUtils;
 
 @RestController()

@@ -7,7 +7,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.base.common.dto.general_response.GeneralResponse;
+import com.base.common.dto.generalresponse.GeneralResponse;
 import com.base.common.utils.convert.ArrayUtils;
 
 public class Base64FileUtils {

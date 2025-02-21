@@ -3,8 +3,8 @@ package com.base.common.service;
 import java.util.List;
 import java.util.Map;
 
-import com.base.common.dto.data_table_filter.DataTableFilter;
-import com.base.common.dto.data_table_response.DataTableResponse;
+import com.base.common.dto.datatablefilter.DataTableFilter;
+import com.base.common.dto.datatableresponse.DataTableResponse;
 
 public interface IEntityService<T> {
     /**

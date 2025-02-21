@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.base.admin.entity.role.Role;
 import com.base.admin.service.role.RoleService;
-import com.base.common.controller.entity.BaseEntityController;
+import com.base.common.controller.entity.impl.BaseEntityController;
 
 @RestController()
 @RequestMapping(path = "/api/v1/role")

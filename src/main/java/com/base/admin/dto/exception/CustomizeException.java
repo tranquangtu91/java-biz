@@ -1,7 +1,7 @@
 package com.base.admin.dto.exception;
 
-import com.base.common.dto.general_response.GeneralResponse;
-import com.base.common.dto.general_response.GeneralResponseErrorDetail;
+import com.base.common.dto.generalresponse.GeneralResponse;
+import com.base.common.dto.generalresponse.GeneralResponseErrorDetail;
 
 public class CustomizeException extends Exception {
 
