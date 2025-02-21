@@ -1,0 +1,11 @@
+package @@package@@.repository.@@snakeCaseName@@;
+
+import org.springframework.stereotype.Repository;
+
+import @@package@@.entity.@@snakeCaseName@@.@@pascalCaseName@@;
+import com.ttq.app.common.repository.BaseCrudRepository;
+
+@Repository
+public interface @@pascalCaseName@@Repository extends BaseCrudRepository<@@pascalCaseName@@, Long> {
+
+}
