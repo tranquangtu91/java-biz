@@ -52,6 +52,14 @@ public class GeneralResponse {
         return __gr;
     }
 
+    public static <T> GeneralResponse error(T value, String message) {
+        GeneralResponse __gr = new GeneralResponse();
+        __gr.code = ResponseCode.ERROR;
+        __gr.message = message;
+        __gr.value = value;
+        return __gr;
+    }
+
     public Integer getCode() {
         return this.code.value;
     }

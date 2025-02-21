@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 
 import com.base.admin.dto.exception.user.UserNotFoundException;
 import com.base.admin.dto.exception.user.WrongPasswordException;
-import com.base.admin.dto.user.UserDto;
 import com.base.admin.entity.personal.Personal;
 import com.base.admin.entity.user.User;
 import com.base.admin.repository.personal.PersonalRepository;
 import com.base.admin.repository.user.UserRepository;
+import com.base.admin.service.user.IAuthService;
 import com.base.admin.service.user.IUserDirectory;
 import com.base.admin.service.user.IUserService;
 import com.base.admin.utils.authprovider.JwtProvider;
@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class UserService extends BaseEntityService<User> implements IUserService {
+public class UserService extends BaseEntityService<User> implements IUserService, IAuthService {
 
     static List<IUserDirectory> otherUserDirectories = new ArrayList<>();
     UserRepository userRepository;
@@ -48,9 +48,9 @@ public class UserService extends BaseEntityService<User> implements IUserService
     }
 
     @Override
-    public UserDto get(Long id, Map<String, Object> options) {
+    public User get(Long id, Map<String, Object> options) {
         User user = super.get(id, options);
-        return (UserDto) user;
+        return user;
     }
 
     @Override
@@ -83,6 +83,11 @@ public class UserService extends BaseEntityService<User> implements IUserService
                 .collect(Collectors.toList());
 
         return authProvider.createResponsePayload(userDetails);
+    }
+
+    @Override
+    public Map<String, Object> refreshToken(String refreshToken, UserDetails userDetails) {
+        return authProvider.refreshToken(refreshToken, (UserDetailsImpl) userDetails);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(@SuppressWarnings("null") InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
         WebMvcConfiguration.registry = registry;
         interceptorHandlers.forEach(it -> {

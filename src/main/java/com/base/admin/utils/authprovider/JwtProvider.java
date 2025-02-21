@@ -109,4 +109,10 @@ public class JwtProvider implements IAuthProvider {
         return;
     }
 
+    @Override
+    public Map<String, Object> refreshToken(String refreshToken, UserDetailsImpl userDetails) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'refreshToken'");
+    }
+
 }

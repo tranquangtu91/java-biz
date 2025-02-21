@@ -1,4 +1,4 @@
-package com.base.admin.controller.user;
+package com.base.admin.controller.user.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.admin.controller.user.IAuthControler;
+import com.base.admin.controller.user.IUserController;
 import com.base.admin.dto.exception.user.UserNotFoundException;
 import com.base.admin.dto.exception.user.WrongPasswordException;
+import com.base.admin.dto.user.LoginRequestDto;
+import com.base.admin.dto.user.RefreshTokenRequestDto;
 import com.base.admin.entity.user.User;
 import com.base.admin.service.user.impl.UserService;
 import com.base.admin.utils.SpringSecurityService;
@@ -30,7 +34,7 @@ import com.base.common.utils.validator.ValidatorUtils;
 
 @RestController()
 @RequestMapping(path = "/api/v1/user")
-public class UserController extends BaseEntityController<User> implements IUserController {
+public class UserController extends BaseEntityController<User> implements IUserController, IAuthControler {
     UserService userService;
 
     @Autowired
@@ -43,7 +47,6 @@ public class UserController extends BaseEntityController<User> implements IUserC
 
     UserController(@Autowired UserService entityService) {
         this.entityService = entityService;
-        this.domainClass = User.class;
 
         this.userService = entityService;
         getExcludeFields.addAll(Arrays.asList("updatedBy", "updatedAt", "deleted", "password"));
@@ -69,13 +72,7 @@ public class UserController extends BaseEntityController<User> implements IUserC
     }
 
     @Override
-    public ResponseEntity<?> logout() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<?> updateProfile(HttpServletRequest request, HttpServletResponse response,
-            @RequestBody Map<String, Object> body) throws UserNotFoundException, WrongPasswordException {
+    public ResponseEntity<?> updateProfile(@RequestBody Map<String, Object> body) throws UserNotFoundException, WrongPasswordException {
         GeneralResponse gr = validatorUtils.validate(UPDATE_PROFILE_CONSTRAINT_CODE, body);
         if (gr.code != ResponseCode.SUCCESS) {
             return new ResponseEntity<GeneralResponse>(gr, HttpStatus.OK);
@@ -100,7 +97,7 @@ public class UserController extends BaseEntityController<User> implements IUserC
     }
 
     @Override
-    public ResponseEntity<?> info(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<GeneralResponse> currentUser() {
         UserDetails userDetail = SpringSecurityService.getPrincipal();
 
         if (userDetail == null) {
@@ -113,15 +110,40 @@ public class UserController extends BaseEntityController<User> implements IUserC
         String[] __getExcludeFields = Arrays.copyOf(getExcludeFields.toArray(), getExcludeFields.size(), String[].class);
         gr.value = ObjectUtils.modifyData(user, __getExcludeFields);
 
-        return new ResponseEntity<>(ObjectUtils.modifyData(gr, __getExcludeFields), HttpStatus.OK);
+        return new ResponseEntity<>(gr, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, Map<String, String> body) {
-        Object rtn = userService.login(body.get("username"), body.get("password"));
+    public ResponseEntity<?> login(LoginRequestDto body) {
+        Object rtn = userService.login(body.getUsername(), body.getPassword());
         if (rtn == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+        return new ResponseEntity<>(rtn, HttpStatus.OK);
+    }    
+
+    @Override
+    public ResponseEntity<GeneralResponse> logout(HttpServletRequest request) {
+        UserDetails userDetail = SpringSecurityService.getPrincipal();
+        if (userDetail == null || userDetail.getUsername().equals("anonymousUser")) {
+            return new ResponseEntity<>(GeneralResponse.error(null, "Unauthorized"), HttpStatus.UNAUTHORIZED);
+        }
+
+        //Get request header
+        String authorization = request.getHeader("Authorization");
+        String accessToken = authorization.substring(7);
+        userService.logout(accessToken, userDetail);
+        return new ResponseEntity<>(GeneralResponse.success(null, "Logout successfully"), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> refreshToken(RefreshTokenRequestDto body) {
+        UserDetails userDetail = SpringSecurityService.getPrincipal();
+        if (userDetail == null || userDetail.getUsername().equals("anonymousUser")) {
+            return new ResponseEntity<>(GeneralResponse.error(null, "Unauthorized"), HttpStatus.UNAUTHORIZED);
+        }
+
+        Object rtn = userService.refreshToken(body.getRefreshToken(), userDetail);
         return new ResponseEntity<>(rtn, HttpStatus.OK);
     }
 }

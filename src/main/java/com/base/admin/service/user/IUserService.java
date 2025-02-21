@@ -2,29 +2,12 @@ package com.base.admin.service.user;
 
 import java.util.Map;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import com.base.admin.dto.exception.user.UserNotFoundException;
 import com.base.admin.dto.exception.user.WrongPasswordException;
 import com.base.admin.entity.user.User;
 
 public interface IUserService {
-    /**
-     * Đăng nhập
-     * 
-     * @param username
-     * @param password
-     * @return
-     */
-    public Map<String, Object> login(String username, String password);
-
-    /**
-     * Đăng xuất
-     * 
-     * @param accessToken
-     * @param userDetail
-     */
-    public void logout(String accessToken, UserDetails userDetail);
+    
 
     /**
      * Tìm kiếm user theo username

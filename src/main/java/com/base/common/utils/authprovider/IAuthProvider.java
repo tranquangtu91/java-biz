@@ -15,6 +15,8 @@ public interface IAuthProvider {
     UserDetailsImpl getUserDetail(String accessToken);
 
     Map<String, Object> createResponsePayload(UserDetailsImpl userDetail);
+    
+    Map<String, Object> refreshToken(String refreshToken, UserDetailsImpl userDetails);
 
     void invokeAccessToken(String accessToken, UserDetails userDetail);
 }
