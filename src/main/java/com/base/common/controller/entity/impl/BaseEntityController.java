@@ -56,7 +56,7 @@ public class BaseEntityController<T> implements IEntityController {
 
     @Override
     public ResponseEntity<Object> save(Map<String, Object> obj) {
-        T item = (T) ObjectUtils.mapToObject(domainClass, obj);
+        T item = (T) ObjectUtils.mapToObject(getDomainClass(), obj);
         item = entityService.save(item);
         String[] __getExcludeFields = getExcludeFields.toArray(new String[0]);
         obj = ObjectUtils.modifyData(item, __getExcludeFields);
