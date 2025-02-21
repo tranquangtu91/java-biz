@@ -1,4 +1,4 @@
-package com.base.admin.service.user;
+package com.base.admin.service.user.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,15 +7,19 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.base.admin.dto.exception.user.UserNotFoundException;
 import com.base.admin.dto.exception.user.WrongPasswordException;
+import com.base.admin.dto.user.UserDto;
 import com.base.admin.entity.personal.Personal;
 import com.base.admin.entity.user.User;
 import com.base.admin.repository.personal.PersonalRepository;
 import com.base.admin.repository.user.UserRepository;
+import com.base.admin.service.user.IUserDirectory;
+import com.base.admin.service.user.IUserService;
 import com.base.admin.utils.authprovider.JwtProvider;
 import com.base.common.dto.user.UserDetailsImpl;
 import com.base.common.service.impl.BaseEntityService;
@@ -26,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class UserService extends BaseEntityService<User> {
+public class UserService extends BaseEntityService<User> implements IUserService {
 
     static List<IUserDirectory> otherUserDirectories = new ArrayList<>();
     UserRepository userRepository;
@@ -43,12 +47,14 @@ public class UserService extends BaseEntityService<User> {
         this.authProvider = authProvider;
     }
 
-    public static void regUserDirectory(IUserDirectory userDirectory) {
-        log.info("register new user directory...");
-        UserService.otherUserDirectories.add(userDirectory);
+    @Override
+    public UserDto get(Long id, Map<String, Object> options) {
+        User user = super.get(id, options);
+        return (UserDto) user;
     }
 
-    public Object login(String username, String password) {
+    @Override
+    public Map<String, Object> login(String username, String password) {
         List<User> users = userRepository.findByUsername(username);
         if (ObjectUtils.isEmpty(users)) {
             return null;
@@ -59,8 +65,9 @@ public class UserService extends BaseEntityService<User> {
             return null;
         }
 
-        Boolean match = compareSync(password,
-                user.getPassword().substring("{bcrypt}".length(), user.getPassword().length()));
+        String encyptedPassword = user.getPassword().substring("{bcrypt}".length(), user.getPassword().length());
+
+        Boolean match = compareSync(password, encyptedPassword);
 
         if (!match) {
             for (IUserDirectory userDirectory : UserService.otherUserDirectories) {
@@ -68,8 +75,7 @@ public class UserService extends BaseEntityService<User> {
             }
         }
 
-        if (!match)
-            return null;
+        if (!match) return null;
 
         UserDetailsImpl userDetails = new UserDetailsImpl();
         userDetails.username = user.getUsername();
@@ -79,10 +85,12 @@ public class UserService extends BaseEntityService<User> {
         return authProvider.createResponsePayload(userDetails);
     }
 
-    public Boolean compareSync(String data, String encypted) {
-        return bCryptPasswordEncoder.matches(data, encypted);
+    @Override
+    public void logout(String accessToken, UserDetails userDetail) {
+        authProvider.invokeAccessToken(accessToken, userDetail);
     }
 
+    @Override
     public User findByUsername(String username) {
         List<User> users = userRepository.findByUsername(username);
         
@@ -92,16 +100,8 @@ public class UserService extends BaseEntityService<User> {
         return users.get(0);
     }
 
-    /**
-     * Cập nhật thông tin user
-     * 
-     * @param username
-     * @param item
-     * @throws UserNotFoundException
-     * @throws WrongPasswordException
-     */
-    public User updateProfile(String username, Map<String, Object> item)
-            throws UserNotFoundException, WrongPasswordException {
+    @Override
+    public User updateProfile(String username, Map<String, Object> item) throws UserNotFoundException, WrongPasswordException {
         List<User> users = userRepository.findByUsername(username);
         if (ObjectUtils.isEmpty(users)) {
             throw new UserNotFoundException(username);
@@ -140,5 +140,14 @@ public class UserService extends BaseEntityService<User> {
         user = this.userRepository.save(user);
 
         return user;
+    }
+
+    public static void regUserDirectory(IUserDirectory userDirectory) {
+        log.info("register new user directory...");
+        UserService.otherUserDirectories.add(userDirectory);
+    }
+
+    private Boolean compareSync(String data, String encypted) {
+        return bCryptPasswordEncoder.matches(data, encypted);
     }
 }

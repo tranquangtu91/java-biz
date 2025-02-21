@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.base.admin.dto.exception.user.UserNotFoundException;
 import com.base.admin.dto.exception.user.WrongPasswordException;
 import com.base.admin.entity.user.User;
-import com.base.admin.service.user.UserService;
+import com.base.admin.service.user.impl.UserService;
 import com.base.admin.utils.SpringSecurityService;
 import com.base.common.controller.entity.impl.BaseEntityController;
 import com.base.common.dto.formfield.FormField;
