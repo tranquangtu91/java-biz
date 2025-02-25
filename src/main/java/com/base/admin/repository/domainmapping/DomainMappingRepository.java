@@ -11,4 +11,7 @@ import java.util.List;
 public interface DomainMappingRepository extends BaseCrudRepository<DomainMapping, Long> {
     List<DomainMapping> findByFirstDomainAndFirstIdAndSecondDomainAndSecondId(String firstDomain, Long firstId,
             String secondDomain, Long secondId);
+
+    List<DomainMapping> findAllByFirstDomainAndFirstIdAndSecondDomain(String firstDomain, Long firstId,
+            String secondDomain);
 }

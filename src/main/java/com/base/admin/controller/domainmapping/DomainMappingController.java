@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.base.admin.entity.domainmapping.DomainMapping;
-import com.base.admin.service.domainmapping.DomainMappingService;
+import com.base.admin.service.domainmapping.impl.DomainMappingService;
 import com.base.common.controller.entity.impl.BaseEntityController;
 
 @RestController()
