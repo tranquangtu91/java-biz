@@ -1,4 +1,4 @@
-package com.base.admin.interceptor.requestmap;
+package com.base.admin.dto.requestmap;
 
 import java.util.List;
 import java.util.regex.Pattern;

@@ -72,7 +72,7 @@ public class UserController extends BaseEntityController<User> implements IUserC
     }
 
     @Override
-    public ResponseEntity<?> updateProfile(@RequestBody Map<String, Object> body) throws UserNotFoundException, WrongPasswordException {
+    public ResponseEntity<?> updateProfile(HttpServletRequest request, @RequestBody Map<String, Object> body) throws UserNotFoundException, WrongPasswordException {
         GeneralResponse gr = validatorUtils.validate(UPDATE_PROFILE_CONSTRAINT_CODE, body);
         if (gr.code != ResponseCode.SUCCESS) {
             return new ResponseEntity<GeneralResponse>(gr, HttpStatus.OK);
@@ -111,6 +111,12 @@ public class UserController extends BaseEntityController<User> implements IUserC
         gr.value = ObjectUtils.modifyData(user, __getExcludeFields);
 
         return new ResponseEntity<>(gr, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<GeneralResponse> menu() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'menu'");
     }
 
     @Override

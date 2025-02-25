@@ -1,6 +1,7 @@
 package com.base.admin.service.user.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ import com.base.admin.repository.user.UserRepository;
 import com.base.admin.service.user.IAuthService;
 import com.base.admin.service.user.IUserDirectory;
 import com.base.admin.service.user.IUserService;
+import com.base.admin.utils.SpringSecurityService;
 import com.base.admin.utils.authprovider.JwtProvider;
 import com.base.common.dto.user.UserDetailsImpl;
 import com.base.common.service.impl.BaseEntityService;
@@ -107,6 +109,8 @@ public class UserService extends BaseEntityService<User> implements IUserService
 
     @Override
     public User updateProfile(String username, Map<String, Object> item) throws UserNotFoundException, WrongPasswordException {
+        UserDetails userDetail = SpringSecurityService.getPrincipal();
+
         List<User> users = userRepository.findByUsername(username);
         if (ObjectUtils.isEmpty(users)) {
             throw new UserNotFoundException(username);
@@ -130,6 +134,11 @@ public class UserService extends BaseEntityService<User> implements IUserService
             ObjectUtils.mergeObject(personal, item.get("personal"));
             if (__newPersonal) {
                 personal.setUser(user);
+                personal.setCreatedBy(userDetail.getUsername());
+                personal.setCreatedAt(new Date());
+            } else {
+                personal.setUpdatedBy(userDetail.getUsername());
+                personal.setUpdatedAt(new Date());
             }
             personal = personalRepository.save(personal);
             user.setPersonal(personal);
@@ -142,6 +151,8 @@ public class UserService extends BaseEntityService<User> implements IUserService
             user.setPassword(item.get("newPassword").toString());
         }
 
+        user.setUpdatedBy(userDetail.getUsername());
+        user.setUpdatedAt(new Date());
         user = this.userRepository.save(user);
 
         return user;
