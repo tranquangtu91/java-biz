@@ -24,7 +24,7 @@ spring:
 #       write-dates-as-timestamps: false
 ---
 log:
-  app_name: base-app
+  app_name: ${spring.application.name}
   pattern: "%d{yy-MM-dd HH:mm:ss.SSS, +07:00} [%5p] %C{5}.%M.%L: %m%n"
   logstash:
     destination: localhost:5000
