@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.admin.application.service.category.CategoryDataService;
+import com.base.admin.application.service.category.impl.CategoryDataService;
 import com.base.admin.domain.entity.category.CategoryData;
 import com.base.common.infrastructure.adapter.in.rest.entity.impl.BaseEntityController;
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.base.admin.application.service.category.CategoryService;
+import com.base.admin.application.service.category.impl.CategoryService;
 import com.base.admin.domain.dto.category.GetCategoryDataDto;
 import com.base.admin.domain.entity.category.Category;
 import com.base.admin.domain.entity.category.CategoryData;

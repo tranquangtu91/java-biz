@@ -1,4 +1,4 @@
-package com.base.admin.application.service.category;
+package com.base.admin.application.service.category.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.admin.application.service.category.ICategoryService;
 import com.base.admin.domain.dto.category.GetCategoryDataDto;
 import com.base.admin.domain.entity.category.Category;
 import com.base.admin.domain.entity.category.CategoryData;
@@ -18,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class CategoryService extends BaseEntityService<Category> {
+public class CategoryService extends BaseEntityService<Category> implements ICategoryService {
     CategoryRepository categoryRepository;
     @Autowired
     CategoryDataRepository categoryDataRepository;
@@ -28,6 +29,7 @@ public class CategoryService extends BaseEntityService<Category> {
         this.categoryRepository = entityRepository;
     }
 
+    @Override
     public List<CategoryData> getCategoryData(GetCategoryDataDto dto) {
         List<Category> categories = categoryRepository.findByCode(dto.categoryCode);
         if (categories.isEmpty())

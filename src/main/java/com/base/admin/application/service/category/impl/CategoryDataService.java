@@ -1,4 +1,4 @@
-package com.base.admin.application.service.category;
+package com.base.admin.application.service.category.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
