@@ -1,0 +1,16 @@
+package com.base.common.application.utils.validator;
+
+import java.util.Map;
+
+import com.base.common.domain.dto.formfield.FormField;
+
+public interface ICheckTooShort {
+    /**
+     * Kiểm tra lỗi TOO_SHORT
+     * 
+     * @param constraint
+     * @param params
+     * @returns
+     */
+    public Boolean checkTooShort(FormField constraint, Map<String, Object> params);
+}

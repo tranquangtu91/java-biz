@@ -1,0 +1,91 @@
+package com.base.admin.infrastructure.filter;
+
+import java.io.IOException;
+import java.util.List;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.base.admin.application.utils.authprovider.JwtProvider;
+import com.base.common.application.utils.Closure;
+import com.base.common.application.utils.cache.CacheHandlerFactory;
+import com.base.common.application.utils.cache.ICacheHandler;
+import com.base.common.application.utils.convert.string.StringUtils;
+import com.base.common.domain.dto.user.UserDetailsImpl;
+import com.base.common.infrastructure.config.SecurityFilterChainConfiguration;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    static Long JWT_CACHE_TTL = 30l;
+
+    JwtProvider jwtProvider;
+    Boolean verbose = false;
+
+    ICacheHandler cacheHandler;
+
+    JwtAuthenticationFilter(@Autowired JwtProvider jwtProvider) {
+        this.jwtProvider = jwtProvider;
+
+        SecurityFilterChainConfiguration.registerFilter(this);
+
+        cacheHandler = CacheHandlerFactory.getCacheHandler();
+    }
+
+    @SuppressWarnings({ "unchecked", "null" })
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        try {
+            String jwt = getJwtFromRequest(request);
+
+            if (StringUtils.hasText(jwt)) {
+                String key = String.format("login:session:jwt:%s", jwt);
+                UserDetailsImpl userDetail = (UserDetailsImpl) cacheHandler.memoize(key, JWT_CACHE_TTL, new Closure() {
+
+                    @Override
+                    public Object handler(Object... args) {
+                        log.debug(String.format("calc jwt '%s'...", StringUtils.maskingData(jwt, 16, -16)));
+                        return jwtProvider.getUserDetail(jwt);
+                    }
+
+                });
+
+                if (userDetail != null) {
+                    List<SimpleGrantedAuthority> grantedAuthorities = (List<SimpleGrantedAuthority>) userDetail.authorities;
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                            userDetail, null, grantedAuthorities);
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            }
+        } catch (Exception ex) {
+            log.error(String.format("%s: %s", ex.getClass().getName(), ex.getMessage()));
+            if (verbose) {
+                ex.printStackTrace();
+            }
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    String getJwtFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+}
