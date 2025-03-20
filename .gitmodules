@@ -4,3 +4,6 @@
 [submodule "src/main/java/com/base/admin"]
 	path = src/main/java/com/base/admin
 	url = https://bitbucket.org/tranquangtu91/java-admin
+[submodule "src/main/java/com/base/redis"]
+	path = src/main/java/com/base/redis
+	url = https://bitbucket.org/tranquangtu91/java-redis
