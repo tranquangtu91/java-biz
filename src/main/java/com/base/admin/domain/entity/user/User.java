@@ -4,15 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import jakarta.persistence.*;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.base.admin.domain.entity.personal.Personal;
 import com.base.admin.domain.entity.role.Role;
 import com.base.common.application.utils.convert.jpa.JpaJsonConverter;
-import com.base.common.domain.entity.BaseEntity;
+import com.base.common.domain.entity.SignedBaseEntity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +34,7 @@ import lombok.Setter;
 @Table(indexes = {
         @Index(unique = true, columnList = "username ASC")
 })
-public class User extends BaseEntity {
+public class User extends SignedBaseEntity {
     @Column(name = "username", nullable = false, unique = true)
     String username;
 
