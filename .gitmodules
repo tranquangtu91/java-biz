@@ -1,0 +1,3 @@
+[submodule "src/main/java/com/base/common"]
+	path = src/main/java/com/base/common
+	url = https://bitbucket.org/tranquangtu91/java-common
