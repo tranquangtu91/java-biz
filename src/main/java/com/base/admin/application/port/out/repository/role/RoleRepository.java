@@ -1,4 +1,4 @@
-package com.base.admin.infrastructure.adapter.out.repository.role;
+package com.base.admin.application.port.out.repository.role;
 
 import org.springframework.stereotype.Repository;
 

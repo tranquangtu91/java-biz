@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.admin.application.port.out.repository.category.CategoryDataRepository;
+import com.base.admin.application.port.out.repository.category.CategoryRepository;
 import com.base.admin.application.service.category.ICategoryService;
 import com.base.admin.domain.dto.category.GetCategoryDataDto;
 import com.base.admin.domain.entity.category.Category;
 import com.base.admin.domain.entity.category.CategoryData;
-import com.base.admin.infrastructure.adapter.out.repository.category.CategoryDataRepository;
-import com.base.admin.infrastructure.adapter.out.repository.category.CategoryRepository;
 import com.base.common.application.service.impl.BaseEntityService;
 import com.base.common.application.utils.convert.object.ObjectUtils;
 

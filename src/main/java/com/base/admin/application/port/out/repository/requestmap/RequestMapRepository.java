@@ -1,4 +1,4 @@
-package com.base.admin.infrastructure.adapter.out.repository.requestmap;
+package com.base.admin.application.port.out.repository.requestmap;
 
 import java.util.List;
 

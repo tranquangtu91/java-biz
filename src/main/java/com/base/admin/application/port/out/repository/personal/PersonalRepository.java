@@ -1,4 +1,4 @@
-package com.base.admin.infrastructure.adapter.out.repository.personal;
+package com.base.admin.application.port.out.repository.personal;
 
 import org.springframework.stereotype.Repository;
 

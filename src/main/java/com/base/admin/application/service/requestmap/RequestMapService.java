@@ -5,9 +5,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.admin.application.port.out.repository.requestmap.RequestMapRepository;
 import com.base.admin.application.utils.SpringSecurityService;
 import com.base.admin.domain.entity.requestmap.RequestMap;
-import com.base.admin.infrastructure.adapter.out.repository.requestmap.RequestMapRepository;
 import com.base.common.application.service.impl.BaseEntityService;
 
 @Service

@@ -1,4 +1,4 @@
-package com.base.admin.infrastructure.adapter.out.repository.menu;
+package com.base.admin.application.port.out.repository.menu;
 
 import org.springframework.stereotype.Repository;
 

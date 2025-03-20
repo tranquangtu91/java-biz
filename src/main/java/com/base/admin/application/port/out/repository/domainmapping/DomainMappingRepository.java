@@ -1,4 +1,4 @@
-package com.base.admin.infrastructure.adapter.out.repository.domainmapping;
+package com.base.admin.application.port.out.repository.domainmapping;
 
 import org.springframework.stereotype.Repository;
 

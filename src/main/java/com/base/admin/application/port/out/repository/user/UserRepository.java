@@ -1,4 +1,4 @@
-package com.base.admin.infrastructure.adapter.out.repository.user;
+package com.base.admin.application.port.out.repository.user;
 
 import com.base.admin.domain.entity.user.User;
 import com.base.common.infrastructure.adapter.out.repository.BaseCrudRepository;

@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.admin.application.port.out.repository.domainmapping.DomainMappingRepository;
 import com.base.admin.application.service.domainmapping.IDomainMappingService;
 import com.base.admin.domain.entity.domainmapping.DomainMapping;
-import com.base.admin.infrastructure.adapter.out.repository.domainmapping.DomainMappingRepository;
 import com.base.common.application.service.impl.BaseEntityService;
 import com.base.common.domain.dto.datatablefilter.DataTableFilter;
 import com.base.common.domain.dto.datatablefilter.Filter;
