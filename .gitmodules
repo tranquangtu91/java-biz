@@ -1,3 +1,6 @@
 [submodule "src/main/java/com/base/common"]
 	path = src/main/java/com/base/common
 	url = https://bitbucket.org/tranquangtu91/java-common
+[submodule "src/main/java/com/base/admin"]
+	path = src/main/java/com/base/admin
+	url = https://bitbucket.org/tranquangtu91/java-admin
