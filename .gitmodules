@@ -7,3 +7,6 @@
 [submodule "src/main/java/com/base/redis"]
 	path = src/main/java/com/base/redis
 	url = https://bitbucket.org/tranquangtu91/java-redis
+[submodule "src/main/java/com/base/function"]
+	path = src/main/java/com/base/function
+	url = https://bitbucket.org/tranquangtu91/java-function
