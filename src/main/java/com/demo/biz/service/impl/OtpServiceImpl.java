@@ -40,8 +40,13 @@ public class OtpServiceImpl implements OtpService {
     }
 
     @Override
-    public boolean verifyOtp(String secretKey , int otp) {
-        return googleAuthConfig.verifyOTP(secretKey, otp);
+    public boolean verifyOtp(String secretKey , String otp) {
+        try {
+            int otpInt = Integer.parseInt(otp);
+            return googleAuthConfig.verifyOTP(secretKey, otpInt);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid OTP format: " + otp);
+            return false;
+        }
     }
-
 }
