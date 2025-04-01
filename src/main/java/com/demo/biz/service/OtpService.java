@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface OtpService {
     public OtpResponseDto registry(String issuer) throws IOException, WriterException;
-    public boolean verifyOtp(String secretKey, int otp);
+    public boolean verifyOtp(String secretKey, String otp);
 }

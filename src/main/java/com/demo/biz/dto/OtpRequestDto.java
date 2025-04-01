@@ -6,5 +6,5 @@ import lombok.Data;
 public class OtpRequestDto {
     private String issuer;
     private String secretKey;
-    private int otp;
+    private String otp;
 }
